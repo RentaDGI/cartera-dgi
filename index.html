@@ -15,24 +15,24 @@
     .gradient-bg-cartera h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; }
     .gradient-bg-cartera p { font-size: 1.25rem; color: rgba(255, 255, 255, 0.9); }
     .stats-grid-cartera { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
-    .stat-card-cartera { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-left: 4px solid #059669; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease; }
+    .stat-card-cartera { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-left: 4px solid #3b82f6; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease; }
     .stat-card-cartera:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); }
     .stat-icon { background: #dbeafe; border-radius: 50%; padding: 1rem; display: inline-flex; margin-bottom: 1rem; }
     .stat-icon i { font-size: 1.5rem; color: #1e40af; }
-    .stat-label { color: #6b7280; font-size: 0.875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
-    .stat-value { font-size: 2.5rem; font-weight: 700; color: #1e40af; margin-top: 0.5rem; }
+    .stat-label { color: #64748b; font-size: 0.875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+    .stat-value { font-size: 2.5rem; font-weight: 700; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-top: 0.5rem; }
     .table-card-cartera { background: white; border-radius: 16px; padding: 2rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); overflow-x: auto; }
     .table-cartera { width: 100%; border-collapse: separate; border-spacing: 0; }
     .table-cartera thead th { background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #3b82f6 100%); color: white; font-weight: 600; text-align: left; padding: 1rem 0.75rem; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; border: none; user-select: none; position: relative; }
     .table-cartera thead th:first-child { border-top-left-radius: 12px; }
     .table-cartera thead th:last-child { border-top-right-radius: 12px; }
     .table-cartera tbody tr { transition: background-color 0.2s; border-bottom: 1px solid #e5e7eb; }
-    .table-cartera tbody tr:hover { background-color: #f9fafb; }
+    .table-cartera tbody tr:hover { background-color: #f8fafc; }
     .table-cartera tbody tr:last-child { border-bottom: none; }
     .table-cartera td { padding: 1rem 0.75rem; font-size: 0.95rem; }
     .ticker-badge { font-weight: 700; color: #1e40af; font-size: 1.125rem; text-transform: uppercase; }
     .sector-badge { display: inline-block; padding: 0.375rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; background: #dbeafe; color: #1e40af; }
-    .yield-badge { display: inline-block; padding: 0.375rem 0.75rem; border-radius: 6px; background: #d1fae5; color: #059669; font-weight: 700; font-size: 0.875rem; }
+    .yield-badge { display: inline-block; padding: 0.375rem 0.75rem; border-radius: 6px; background: #f1f5f9; color: #334155; font-weight: 700; font-size: 0.875rem; }
     .loading-cartera { text-align: center; padding: 3rem; }
     .spinner-cartera { display: inline-block; width: 3rem; height: 3rem; border: 4px solid #e5e7eb; border-top-color: #1e40af; border-radius: 50%; animation: spin-cartera 1s linear infinite; }
     @keyframes spin-cartera { to { transform: rotate(360deg); } }
@@ -52,6 +52,25 @@
       .gradient-bg-cartera h1 { font-size: 1.875rem; }
       .table-cartera { font-size: 0.75rem; }
       .table-cartera td, .table-cartera th { padding: 0.5rem 0.375rem; }
+    }
+    
+    /* Estilos para filas alternas */
+    .table-cartera tbody tr:nth-child(even) {
+      background-color: #f9fafb;
+    }
+    
+    /* Hover más suave */
+    .table-cartera tbody tr:hover {
+      background-color: #f1f5f9 !important;
+    }
+    
+    /* Separadores verticales suaves */
+    .table-cartera td, .table-cartera th {
+      border-right: 1px solid #f1f5f9;
+    }
+    
+    .table-cartera td:last-child, .table-cartera th:last-child {
+      border-right: none;
     }
   </style>
 </head>
@@ -121,6 +140,15 @@
         <button class="filter-btn" data-filter="sector-etf">
           <i class="fas fa-chart-line"></i> ETF
         </button>
+        <button class="filter-btn" data-filter="yield-alto">
+          <i class="fas fa-percentage"></i> Yield ≥ 4%
+        </button>
+        <button class="filter-btn" data-filter="yield-medio">
+          <i class="fas fa-percentage"></i> Yield 2-4%
+        </button>
+        <button class="filter-btn" data-filter="yield-bajo">
+          <i class="fas fa-percentage"></i> Yield < 2%
+        </button>
       </div>
     </div>
 
@@ -130,12 +158,14 @@
         <thead>
           <tr>
             <th style="width: 50px;" class="sortable" data-sort="index">#</th>
-            <th><i class="fas fa-tag"></i> Ticker</th>
+            <th class="sortable" data-sort="ticker"><i class="fas fa-tag"></i> Ticker</th>
             <th class="sortable" data-sort="empresa"><i class="fas fa-building"></i> Empresa</th>
             <th class="sortable" data-sort="sector"><i class="fas fa-industry"></i> Sector</th>
             <th style="text-align: center;" class="sortable" data-sort="porcentaje"><i class="fas fa-percentage"></i> % Cartera</th>
             <th style="text-align: right;"><i class="fas fa-euro-sign"></i> Precio</th>
+            <th style="text-align: center;" class="sortable" data-sort="yield"><i class="fas fa-chart-line"></i> Yield %</th>
             <th style="text-align: right;"><i class="fas fa-coins"></i> Nº Acciones</th>
+            <th style="text-align: right;" class="sortable" data-sort="dividendo"><i class="fas fa-hand-holding-usd"></i> Dividendo Anual €</th>
             <th style="text-align: right;"><i class="fas fa-wallet"></i> Valor €</th>
           </tr>
         </thead>
@@ -198,6 +228,8 @@
           tr.setAttribute('data-sector', r.sector ? r.sector.toLowerCase().replace(/\s+/g, '-') : '');
           tr.setAttribute('data-porcentaje', r.porcentajeCarteraNum != null ? (r.porcentajeCarteraNum * 100) : 0);
           tr.setAttribute('data-valor', r.valorEuros != null ? r.valorEuros : 0);
+          tr.setAttribute('data-dividendo', r.dividendoAnualEuros != null ? r.dividendoAnualEuros : 0);
+          tr.setAttribute('data-yield', r.yieldActual != null ? r.yieldActual : 0);
           
           // # (índice)
           const tdIndex = document.createElement('td');
@@ -258,12 +290,37 @@
           }
           tr.appendChild(tdPrecio);
           
+          // Yield Actual (%)
+          const tdYield = document.createElement('td');
+          tdYield.style.textAlign = 'center';
+          tdYield.style.fontWeight = '600';
+          if (r.yieldActual != null) {
+            const yb = document.createElement('span');
+            yb.className = 'yield-badge';
+            yb.textContent = fmt(r.yieldActual, 2, '%');
+            tdYield.appendChild(yb);
+          } else {
+            tdYield.textContent = '—';
+          }
+          tr.appendChild(tdYield);
+          
           // Nº Acciones
           const tdNum = document.createElement('td');
           tdNum.style.textAlign = 'right';
           tdNum.style.fontWeight = '500';
           tdNum.textContent = r.numAcciones != null ? fmt(r.numAcciones, 0) : '—';
           tr.appendChild(tdNum);
+          
+          // Dividendo Anual €
+          const tdDiv = document.createElement('td');
+          tdDiv.style.textAlign = 'right';
+          tdDiv.style.fontWeight = '600';
+          if (r.dividendoAnualEuros != null) {
+            tdDiv.textContent = fmt(r.dividendoAnualEuros, 2, '€');
+          } else {
+            tdDiv.textContent = "—";
+          }
+          tr.appendChild(tdDiv);
           
           // Valor €
           const tdVal = document.createElement('td');
@@ -294,10 +351,18 @@
         
         let totalStocks = data.length;
         let totalValue = 0;
+        let totalDividend = 0;
         
         data.forEach(item => {
           totalValue += (typeof item.valorEuros === 'number' ? item.valorEuros : 0);
+          totalDividend += (typeof item.dividendoAnualEuros === 'number' ? item.dividendoAnualEuros : 0);
         });
+        
+        // Calcular yield de cartera
+        let portfolioYield = 0;
+        if (totalValue > 0) {
+          portfolioYield = (totalDividend / totalValue) * 100;
+        }
         
         statsContainer.innerHTML =
           '<div class="stat-card-cartera">' +
@@ -311,6 +376,18 @@
             '<div class="stat-label">Valor Total</div>' +
             '<div class="stat-value">' + fmt(totalValue, 0, '€') + '</div>' +
             '<p style="font-size: 0.75rem; color: #6b7280; margin-top: 0.5rem;">Valor de mercado</p>' +
+          '</div>' +
+          '<div class="stat-card-cartera">' +
+            '<div class="stat-icon" style="background: #d1fae5;"><i class="fas fa-hand-holding-usd" style="color: #059669;"></i></div>' +
+            '<div class="stat-label">Dividendo Anual Total</div>' +
+            '<div class="stat-value" style="color: #059669;">' + fmt(totalDividend, 2, '€') + '</div>' +
+            '<p style="font-size: 0.75rem; color: #6b7280; margin-top: 0.5rem;">Ingreso anual estimado</p>' +
+          '</div>' +
+          '<div class="stat-card-cartera">' +
+            '<div class="stat-icon" style="background: #dbeafe;"><i class="fas fa-percentage" style="color: #1e40af;"></i></div>' +
+            '<div class="stat-label">Yield Cartera</div>' +
+            '<div class="stat-value" style="color: #1e40af;">' + fmt(portfolioYield, 2, '%') + '</div>' +
+            '<p style="font-size: 0.75rem; color: #6b7280; margin-top: 0.5rem;">Rentabilidad media</p>' +
           '</div>';
       }
 
@@ -364,6 +441,21 @@
           const precio = row[4] ? cleanNum(row[4].v) : null;
           const numAcciones = row[5] ? cleanNum(row[5].v) : null;
           const valorEuros = row[6] ? cleanNum(row[6].v) : null;
+          // Columna H (índice 7) - Dividendo Anual en Euros
+          const dividendoAnualEuros = row[7] ? cleanNum(row[7].v) : null;
+          // Columna I (índice 8) - DPA (Dividendo Por Acción) en Euros
+          const dpaEuros = row[8] ? cleanNum(row[8].v) : null;
+          
+          // Calcular Yield Actual: (DPA / Precio) * 100
+          let yieldActual = null;
+          if (dpaEuros != null && precio != null && precio !== 0) {
+            yieldActual = (dpaEuros / precio) * 100;
+          }
+          
+          // Corrección para tickers UK que empiezan por LON:
+          if (ticker && ticker.startsWith('LON:') && yieldActual != null) {
+            yieldActual = yieldActual * 100;
+          }
           
           portfolioData.push({
             ticker,
@@ -372,7 +464,10 @@
             porcentajeCarteraNum, // Número decimal (0.0227)
             precio,
             numAcciones,
-            valorEuros
+            valorEuros,
+            dividendoAnualEuros, // Nuevo campo
+            dpaEuros, // Campo DPA
+            yieldActual // Campo calculado
           });
         });
         
@@ -484,6 +579,7 @@
             var rows = document.querySelectorAll("#portfolio-body-cartera tr");
             rows.forEach(function(row) {
               var sector = row.getAttribute("data-sector");
+              var yieldVal = parseFloat(row.getAttribute("data-yield"));
               var show = false;
               switch(filter) {
                 case "all":
@@ -521,6 +617,15 @@
                   break;
                 case "sector-etf":
                   show = sector.includes("etf");
+                  break;
+                case "yield-alto":
+                  show = yieldVal >= 4;
+                  break;
+                case "yield-medio":
+                  show = yieldVal >= 2 && yieldVal < 4;
+                  break;
+                case "yield-bajo":
+                  show = yieldVal < 2;
                   break;
                 default:
                   show = true;
@@ -576,6 +681,10 @@
               aValue = parseInt(a.cells[0].textContent);
               bValue = parseInt(b.cells[0].textContent);
               break;
+            case 'ticker':
+              aValue = a.cells[1].textContent.toLowerCase();
+              bValue = b.cells[1].textContent.toLowerCase();
+              break;
             case 'empresa':
               aValue = a.cells[2].textContent.toLowerCase();
               bValue = b.cells[2].textContent.toLowerCase();
@@ -588,6 +697,14 @@
               // Ordenar por valor en lugar de porcentaje
               aValue = parseFloat(a.getAttribute("data-valor"));
               bValue = parseFloat(b.getAttribute("data-valor"));
+              break;
+            case 'dividendo':
+              aValue = parseFloat(a.getAttribute("data-dividendo"));
+              bValue = parseFloat(b.getAttribute("data-dividendo"));
+              break;
+            case 'yield':
+              aValue = parseFloat(a.getAttribute("data-yield"));
+              bValue = parseFloat(b.getAttribute("data-yield"));
               break;
             default:
               return 0;

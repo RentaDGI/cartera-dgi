@@ -32,22 +32,13 @@
     .table-cartera td { padding: 1rem 0.75rem; font-size: 0.95rem; }
     .ticker-badge { font-weight: 700; color: #1e40af; font-size: 1.125rem; text-transform: uppercase; }
     .sector-badge { display: inline-block; padding: 0.375rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; color: white; }
-    .yield-badge { display: inline-block; padding: 0.375rem 0.75rem; border-radius: 6px; background: #f1f5f9; color: #334155; font-weight: 700; font-size: 0.875rem; }
+    .yield-badge { display: inline-block; padding: 0.375rem 0.75rem; border-radius: 6px; font-weight: 700; font-size: 0.875rem; color: white; }
     .loading-cartera { text-align: center; padding: 3rem; }
     .spinner-cartera { display: inline-block; width: 3rem; height: 3rem; border: 4px solid #e5e7eb; border-top-color: #1e40af; border-radius: 50%; animation: spin-cartera 1s linear infinite; }
     @keyframes spin-cartera { to { transform: rotate(360deg); } }
     .error-cartera { background: #fee2e2; border-left: 4px solid #ef4444; padding: 1.5rem; border-radius: 8px; margin: 2rem 0; }
     .error-cartera h3 { color: #991b1b; font-weight: 600; margin-bottom: 0.5rem; }
     .error-cartera p { color: #dc2626; font-size: 0.875rem; }
-    .filter-buttons { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
-    .filter-btn { padding: 10px 20px; border-radius: 25px; border: 2px solid #e5e7eb; background: white; color: #64748b; font-weight: 600; cursor: pointer; transition: all 0.3s; }
-    .filter-btn:hover { border-color: #667eea; color: #667eea; }
-    .filter-btn.active { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-color: transparent; }
-    .sortable { cursor: pointer; user-select: none; position: relative; }
-    .sortable:hover { background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #3b82f6 100%); }
-    .sortable::after { content: '⇅'; position: absolute; right: 8px; opacity: 0.3; font-size: 0.875rem; }
-    .sortable.sort-asc::after { content: '↑'; opacity: 1; color: #10b981; }
-    .sortable.sort-desc::after { content: '↓'; opacity: 1; color: #ef4444; }
     
     /* Colores por sector */
     .sector-financials { background: linear-gradient(135deg, #3b82f6, #60a5fa); }
@@ -62,6 +53,80 @@
     .sector-materials { background: linear-gradient(135deg, #65a30d, #84cc16); }
     .sector-etf { background: linear-gradient(135deg, #4c1d95, #7c3aed); }
     .sector-other { background: linear-gradient(135deg, #64748b, #94a3b8); }
+    
+    /* Colores por yield */
+    .yield-alto { background: linear-gradient(135deg, #10b981, #34d399); } /* > 4% */
+    .yield-medio { background: linear-gradient(135deg, #f59e0b, #fbbf24); } /* 2-4% */
+    .yield-bajo { background: linear-gradient(135deg, #ef4444, #f97316); } /* < 2% */
+    
+    .filter-buttons { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+    .filter-btn { padding: 10px 20px; border-radius: 25px; border: 2px solid #e5e7eb; background: white; color: #64748b; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+    .filter-btn:hover { border-color: #667eea; color: #667eea; }
+    .filter-btn.active { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-color: transparent; }
+    
+    /* Filtros de sector con colores */
+    .filter-btn[data-filter="sector-financials"] { border-color: #3b82f6; }
+    .filter-btn[data-filter="sector-financials"]:hover { background: linear-gradient(135deg, #3b82f6, #60a5fa); color: white; border-color: #3b82f6; }
+    .filter-btn[data-filter="sector-financials"].active { background: linear-gradient(135deg, #3b82f6, #60a5fa); color: white; border-color: #3b82f6; }
+    
+    .filter-btn[data-filter="sector-health-care"] { border-color: #10b981; }
+    .filter-btn[data-filter="sector-health-care"]:hover { background: linear-gradient(135deg, #10b981, #34d399); color: white; border-color: #10b981; }
+    .filter-btn[data-filter="sector-health-care"].active { background: linear-gradient(135deg, #10b981, #34d399); color: white; border-color: #10b981; }
+    
+    .filter-btn[data-filter="sector-consumer-staples"] { border-color: #f59e0b; }
+    .filter-btn[data-filter="sector-consumer-staples"]:hover { background: linear-gradient(135deg, #f59e0b, #fbbf24); color: white; border-color: #f59e0b; }
+    .filter-btn[data-filter="sector-consumer-staples"].active { background: linear-gradient(135deg, #f59e0b, #fbbf24); color: white; border-color: #f59e0b; }
+    
+    .filter-btn[data-filter="sector-utilities"] { border-color: #8b5cf6; }
+    .filter-btn[data-filter="sector-utilities"]:hover { background: linear-gradient(135deg, #8b5cf6, #a78bfa); color: white; border-color: #8b5cf6; }
+    .filter-btn[data-filter="sector-utilities"].active { background: linear-gradient(135deg, #8b5cf6, #a78bfa); color: white; border-color: #8b5cf6; }
+    
+    .filter-btn[data-filter="sector-industrials"] { border-color: #ec4899; }
+    .filter-btn[data-filter="sector-industrials"]:hover { background: linear-gradient(135deg, #ec4899, #f472b6); color: white; border-color: #ec4899; }
+    .filter-btn[data-filter="sector-industrials"].active { background: linear-gradient(135deg, #ec4899, #f472b6); color: white; border-color: #ec4899; }
+    
+    .filter-btn[data-filter="sector-real-estate"] { border-color: #06b6d4; }
+    .filter-btn[data-filter="sector-real-estate"]:hover { background: linear-gradient(135deg, #06b6d4, #0ea5e9); color: white; border-color: #06b6d4; }
+    .filter-btn[data-filter="sector-real-estate"].active { background: linear-gradient(135deg, #06b6d4, #0ea5e9); color: white; border-color: #06b6d4; }
+    
+    .filter-btn[data-filter="sector-technology"] { border-color: #ef4444; }
+    .filter-btn[data-filter="sector-technology"]:hover { background: linear-gradient(135deg, #ef4444, #f97316); color: white; border-color: #ef4444; }
+    .filter-btn[data-filter="sector-technology"].active { background: linear-gradient(135deg, #ef4444, #f97316); color: white; border-color: #ef4444; }
+    
+    .filter-btn[data-filter="sector-communication-services"] { border-color: #14b8a6; }
+    .filter-btn[data-filter="sector-communication-services"]:hover { background: linear-gradient(135deg, #14b8a6, #0d9488); color: white; border-color: #14b8a6; }
+    .filter-btn[data-filter="sector-communication-services"].active { background: linear-gradient(135deg, #14b8a6, #0d9488); color: white; border-color: #14b8a6; }
+    
+    .filter-btn[data-filter="sector-energy"] { border-color: #78716c; }
+    .filter-btn[data-filter="sector-energy"]:hover { background: linear-gradient(135deg, #78716c, #a8a29e); color: white; border-color: #78716c; }
+    .filter-btn[data-filter="sector-energy"].active { background: linear-gradient(135deg, #78716c, #a8a29e); color: white; border-color: #78716c; }
+    
+    .filter-btn[data-filter="sector-materials"] { border-color: #65a30d; }
+    .filter-btn[data-filter="sector-materials"]:hover { background: linear-gradient(135deg, #65a30d, #84cc16); color: white; border-color: #65a30d; }
+    .filter-btn[data-filter="sector-materials"].active { background: linear-gradient(135deg, #65a30d, #84cc16); color: white; border-color: #65a30d; }
+    
+    .filter-btn[data-filter="sector-etf"] { border-color: #4c1d95; }
+    .filter-btn[data-filter="sector-etf"]:hover { background: linear-gradient(135deg, #4c1d95, #7c3aed); color: white; border-color: #4c1d95; }
+    .filter-btn[data-filter="sector-etf"].active { background: linear-gradient(135deg, #4c1d95, #7c3aed); color: white; border-color: #4c1d95; }
+    
+    /* Filtros de yield con colores */
+    .filter-btn[data-filter="yield-alto"] { border-color: #10b981; }
+    .filter-btn[data-filter="yield-alto"]:hover { background: linear-gradient(135deg, #10b981, #34d399); color: white; border-color: #10b981; }
+    .filter-btn[data-filter="yield-alto"].active { background: linear-gradient(135deg, #10b981, #34d399); color: white; border-color: #10b981; }
+    
+    .filter-btn[data-filter="yield-medio"] { border-color: #f59e0b; }
+    .filter-btn[data-filter="yield-medio"]:hover { background: linear-gradient(135deg, #f59e0b, #fbbf24); color: white; border-color: #f59e0b; }
+    .filter-btn[data-filter="yield-medio"].active { background: linear-gradient(135deg, #f59e0b, #fbbf24); color: white; border-color: #f59e0b; }
+    
+    .filter-btn[data-filter="yield-bajo"] { border-color: #ef4444; }
+    .filter-btn[data-filter="yield-bajo"]:hover { background: linear-gradient(135deg, #ef4444, #f97316); color: white; border-color: #ef4444; }
+    .filter-btn[data-filter="yield-bajo"].active { background: linear-gradient(135deg, #ef4444, #f97316); color: white; border-color: #ef4444; }
+    
+    .sortable { cursor: pointer; user-select: none; position: relative; }
+    .sortable:hover { background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #3b82f6 100%); }
+    .sortable::after { content: '⇅'; position: absolute; right: 8px; opacity: 0.3; font-size: 0.875rem; }
+    .sortable.sort-asc::after { content: '↑'; opacity: 1; color: #10b981; }
+    .sortable.sort-desc::after { content: '↓'; opacity: 1; color: #ef4444; }
     
     @media (max-width: 768px) {
       .gradient-bg-cartera h1 { font-size: 1.875rem; }
@@ -325,13 +390,23 @@
           }
           tr.appendChild(tdPrecio);
           
-          // Yield Actual (%)
+          // Yield Actual (%) con color según valor
           const tdYield = document.createElement('td');
           tdYield.style.textAlign = 'center';
           tdYield.style.fontWeight = '600';
           if (r.yieldActual != null) {
             const yb = document.createElement('span');
             yb.className = 'yield-badge';
+            
+            // Asignar clase de color según el yield
+            if (r.yieldActual >= 4) {
+              yb.classList.add('yield-alto');
+            } else if (r.yieldActual >= 2) {
+              yb.classList.add('yield-medio');
+            } else {
+              yb.classList.add('yield-bajo');
+            }
+            
             yb.textContent = fmt(r.yieldActual, 2, '%');
             tdYield.appendChild(yb);
           } else {

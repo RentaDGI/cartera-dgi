@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mi Cartera DGI — Interactiva (para incrustar en WordPress vía iframe)</title>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+:root { color-scheme: light; }
+* { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif; }
+.container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+.header {
+  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #3b82f6 100%);
+  color: #fff; border-radius: 16px; padding: 2rem; margin-bottom: 1rem; text-align:center;
+}
+.header h1 { font-size: 2rem; font-weight: 800; }
+.header p { opacity:.95; }
+.notice { background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:1rem; margin-bottom: 1rem; display:flex; gap:.75rem; align-items:flex-start; }
+.notice i { color:#2563eb; }
+.codebox { width:100%; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size:.85rem; background:#111827; color:#e5e7eb; padding:.75rem; border-radius:.5rem; white-space:pre; overflow:auto; }
+.btn { display:inline-flex; align-items:center; gap:.5rem; border-radius:10px; padding:.6rem .9rem; font-weight:600; text-decoration:none; border:1px solid transparent; }
+.btn-primary { background:#1e40af; color:#fff; }
+.btn-primary:hover { background:#1d4ed8; }
+.btn-ghost { background:#fff; color:#1e40af; border-color:#cbd5e1; }
+.btn-ghost:hover { background:#f8fafc; }
+
+.stats { display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:1rem; margin:1rem 0; }
+.stat { background:linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-left:4px solid #059669; border-radius:12px; padding:1rem; }
+.stat .icon { background:#dbeafe; border-radius:9999px; width:44px; height:44px; display:flex; align-items:center; justify-content:center; margin-bottom:.5rem; }
+.stat .icon i { color:#1e40af; }
+.stat .label { color:#6b7280; font-size:.8rem; font-weight:600; text-transform:uppercase; letter-spacing:.05em; }
+.stat .value { font-size:1.8rem; font-weight:800; color:#1e40af; }
+
+.card { background:#fff; border:1px solid #e5e7eb; border-radius:14px; box-shadow:0 8px 24px rgba(2,6,23,.06); overflow:hidden; }
+.card h3 { font-weight:700; }
+
+.table-wrap { overflow-x:auto; }
+.table { width:100%; border-collapse: separate; border-spacing: 0; }
+.table thead th { background:linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #3b82f6 100%); color:#fff; text-align:left; font-size:.85rem; font-weight:700; padding:.75rem; }
+.table thead th:first-child { border-top-left-radius: 12px; }
+.table thead th:last-child  { border-top-right-radius: 12px; }
+.table tbody tr { border-bottom:1px solid #e5e7eb; }
+.table tbody tr:hover { background:#f9fafb; }
+.table td { padding:.75rem; font-size:.95rem; }
+.badge-ticker { font-weight:800; color:#1e40af; font-size:1.05rem; }
+.badge-sector { display:inline-block; padding:.35rem .6rem; border-radius:9999px; background:#dbeafe; color:#1e40af; font-weight:700; font-size:.75rem; }
+.badge-yield { display:inline-block; padding:.35rem .6rem; border-radius:.5rem; background:#d1fae5; color:#059669; font-weight:800; font-size:.85rem; }
+.loading { text-align:center; padding:2rem; color:#475569; }
+.error { background:#fee2e2; border-left:4px solid #ef4444; padding:1rem; border-radius:10px; color:#991b1b; margin:1rem 0; }
+
+.fallback { border:1px dashed #cbd5e1; border-radius:12px; overflow:hidden; }
+.fallback .hint { background:#f1f5f9; color:#334155; border-bottom:1px solid #e2e8f0; padding:.6rem .8rem; display:flex; align-items:center; gap:.5rem; }
+.fallback iframe { width:100%; min-height: 750px; border:0; display:block; }
+
+.debug { margin-top: .5rem; font-size:.8rem; color:#334155; background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; }
+.debug .head { padding:.5rem .75rem; border-bottom:1px solid #e2e8f0; display:flex; align-items:center; gap:.5rem; }
+.debug pre { margin:0; padding:.5rem .75rem; max-height:200px; overflow:auto; white-space:pre-wrap; }
+
+@media (max-width: 768px) {
+  .header h1 { font-size: 1.6rem; }
+}
+</style>
+</head>
+<body class="bg-gray-50">
+  <div class="container">
+    <div class="header">
+      <h1><i class="fas fa-wallet"></i> Mi Cartera DGI — Interactiva</h1>
+      <p>Tabla y estadísticas construidas desde Google Sheets publicada (CSV). Ideal para incrustar en WordPress vía iframe.</p>
+      <p style="font-size:.85rem; opacity:.9; margin-top:.35rem"><i class="fa-solid fa-circle-info"></i> Sube este archivo a un hosting (p. ej., GitHub Pages/tu dominio) y en WordPress incrusta un iframe a esta URL. No dependes de scripts dentro del post.</p>
+    </div>
+
+    <div class="notice">
+      <i class="fa-regular fa-window-maximize mt-1"></i>
+      <div>
+        <div class="font-semibold text-slate-800">Cómo incrustar en WordPress</div>
+        <div class="text-slate-600 text-sm">Usa un bloque “HTML personalizado” con el siguiente iframe. Cambia publishedId/gid si lo necesitas.</div>
+        <div class="mt-2">
+          <pre class="codebox" id="embed-code"></pre>
+        </div>
+        <div class="actions mt-2">
+          <a class="btn btn-primary" id="open-self" target="_blank" rel="noopener">
+            <i class="fa-solid fa-up-right-from-square"></i> Abrir esta vista
+          </a>
+          <a class="btn btn-ghost" id="open-sheet" target="_blank" rel="noopener">
+            <i class="fa-brands fa-google-drive"></i> Abrir Google Sheet publicada
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="notice">
+      <i class="fa-brands fa-github mt-1"></i>
+      <div>
+        <div class="font-semibold text-slate-800">Publicar en GitHub Pages (desde un Gist o repositorio)</div>
+        <div class="text-slate-600 text-sm">Súbelo a GitHub Pages y embébelo en WordPress con el iframe de arriba. Pasos rápidos:</div>
+        <ol class="text-slate-600 text-sm pl-5 list-decimal mt-2">
+          <li>Crea un repositorio público (por ejemplo, nombre-de-portfolio) en tu cuenta de GitHub.</li>
+          <li>Sube este archivo index.html a la raíz del repo (o reemplázalo si ya existe).</li>
+          <li>Ve a Settings → Pages → Source: Deploy from a branch. Selecciona la rama (main) y la carpeta (root).</li>
+          <li>Guarda y espera 1–2 minutos. GitHub Pages te dará una URL del estilo https://TU-USUARIO.github.io/nombre-de-portfolio/.</li>
+          <li>Usa esa URL en el iframe que ves arriba (se actualiza solo) para incrustarlo en WordPress.</li>
+        </ol>
+        <div class="text-slate-500 text-xs mt-2">Tip: Puedes añadir ?publishedId=2PACX-...&gid=0 a la URL de Pages para apuntar a otra hoja o pestaña sin editar el código.</div>
+      </div>
+    </div>
+
+    <div class="stats" id="stats"></div>
+
+    <div id="loading" class="loading">
+      <div class="inline-block w-10 h-10 border-4 border-slate-200 border-t-blue-700 rounded-full animate-spin"></div>
+      <p class="mt-2">Cargando datos…</p>
+    </div>
+
+    <div id="error" class="error" style="display:none;"></div>
+
+    <div id="table-card" class="card" style="display:none;">
+      <div class="p-4 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
+        <h3><i class="fa-solid fa-table"></i> Detalle de la cartera</h3>
+        <div class="text-slate-600 text-sm" id="source-hint"></div>
+      </div>
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th><i class="fas fa-tag"></i> Ticker</th>
+              <th><i class="fas fa-building"></i> Empresa</th>
+              <th><i class="fas fa-industry"></i> Sector</th>
+              <th style="text-align:center;"><i class="fas fa-percentage"></i> % Cartera</th>
+              <th style="text-align:right;"><i class="fas fa-euro-sign"></i> Precio</th>
+              <th style="text-align:right;"><i class="fas fa-chart-line"></i> Yield</th>
+              <th style="text-align:right;"><i class="fas fa-coins"></i> Nº Acciones</th>
+              <th style="text-align:right;"><i class="fas fa-hand-holding-usd"></i> Dividendo Anual</th>
+              <th style="text-align:right;"><i class="fas fa-wallet"></i> Valor €</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="fallback" class="fallback card mt-4" style="display:none;">
+      <div class="hint">
+        <i class="fa-brands fa-google-drive"></i>
+        <span>Mostrando la hoja publicada (iframe) porque no fue posible cargar datos dinámicos.</span>
+      </div>
+      <iframe id="fallback-frame" loading="lazy" referrerpolicy="no-referrer"></iframe>
+    </div>
+
+    <div class="debug">
+      <div class="head"><i class="fa-solid fa-bug text-rose-600"></i> Debug</div>
+      <pre id="debug-log"></pre>
+    </div>
+  </div>
+
+<script>
+(function(){
+  "use strict";
+
+  // CONFIG: ID publicadas y gid por defecto (los puedes pasar por query string)
+  var DEFAULT_PUBLISHED_ID = "2PACX-1vSh1P6hzgVsL4WgLaDJLSDhsuJKVsZO0HkVBnh6XoTZK7PnormR_H6JihJYSxtok_N3E1k26aV8X-1U";
+  var DEFAULT_GID = "0";
+
+  // Utilidades
+  function $(sel){ return document.querySelector(sel); }
+  function log(){
+    try {
+      var args = Array.prototype.slice.call(arguments).map(function(a){
+        try { return typeof a === 'object' ? JSON.stringify(a) : String(a); } catch(e){ return String(a); }
+      });
+      var line = args.join(' ');
+      var pre = $('#debug-log'); if(pre){ pre.textContent += line + "\n"; }
+      if(window.console) console.log.apply(console, arguments);
+    } catch(e){}
+  }
+  function toNumber(v){
+    if(v==null || v==='') return null;
+    var s = String(v).trim().replace(/[€$£%]/g, '').replace(/\s+/g,'');
+    var hasDot = s.indexOf('.')>-1, hasComma = s.indexOf(',')>-1;
+    if(hasDot && hasComma){
+      if(s.lastIndexOf(',')>s.lastIndexOf('.')){ s = s.split('.').join(''); s = s.replace(',', '.'); }
+      else { s = s.split(',').join(''); }
+    } else if(hasComma){ s = s.replace(',', '.'); }
+    var n = parseFloat(s); return isNaN(n)?null:n;
+  }
+  function fmt(n, d){ if(n==null || isNaN(n)) return '—'; return Number(n).toLocaleString('es-ES',{minimumFractionDigits:d, maximumFractionDigits:d}); }
+  function getQS(){ var o={}; location.search.replace(/^[?]/,'').split('&').forEach(function(p){ if(!p) return; var kv=p.split('='); o[decodeURIComponent(kv[0])]=decodeURIComponent(kv.slice(1).join('=')); }); return o; }
+
+  // Construcción de URLs de Google Sheets publicada
+  function csvUrl(publishedId, gid){
+    return 'https://docs.google.com/spreadsheets/d/e/'+ encodeURIComponent(publishedId) + '/pub?gid=' + encodeURIComponent(gid||'0') + '&single=true&output=csv';
+  }
+  function pubHtmlUrl(publishedId, gid){
+    return 'https://docs.google.com/spreadsheets/d/e/'+ encodeURIComponent(publishedId) + '/pubhtml?gid=' + encodeURIComponent(gid||'0') + '&single=true&widget=true&headers=false';
+  }
+
+  // CSV parser (simple, compatible con comas/quotes)
+  function parseCSV(text){
+    var rows = []; var cur=[]; var field=''; var inQ=false; var i=0; var c;
+    function endField(){ cur.push(field); field=''; }
+    function endRow(){ endField(); rows.push(cur); cur=[]; }
+    for(i=0;i<text.length;i++){
+      c=text[i];
+      if(inQ){
+        if(c==='"'){
+          if(text[i+1]==='"'){ field+='"'; i++; }
+          else { inQ=false; }
+        } else { field+=c; }
+      } else {
+        if(c==='"'){ inQ=true; }
+        else if(c===','){ endField(); }
+        else if(c==='\n'){ endRow(); }
+        else if(c==='\r'){ /* skip */ }
+        else { field+=c; }
+      }
+    }
+    // última celda/fila
+    if(field!=='' || cur.length){ endRow(); }
+    return rows;
+  }
+
+  function buildEmbedCode(url){
+    return '<iframe src="' + url + '" style="width:100%;min-height:850px;border:0;" loading="lazy" referrerpolicy="no-referrer"></iframe>';
+  }
+
+  function load(){
+    var qs = getQS();
+    var publishedId = (qs.publishedId && qs.publishedId.trim()) || DEFAULT_PUBLISHED_ID;
+    var gid = (qs.gid && qs.gid.trim()) || DEFAULT_GID;
+
+    var dataUrl = csvUrl(publishedId, gid);
+    var htmlUrl = pubHtmlUrl(publishedId, gid);
+
+    // Rellenar UI de ayuda
+    var selfUrl = location.origin + location.pathname + '?publishedId=' + encodeURIComponent(publishedId) + '&gid=' + encodeURIComponent(gid);
+    var embed = buildEmbedCode(selfUrl);
+    var embedNode = $('#embed-code'); if(embedNode) embedNode.textContent = embed;
+    var openSelf = $('#open-self'); if(openSelf) { openSelf.href = selfUrl; }
+    var openSheet = $('#open-sheet'); if(openSheet) { openSheet.href = htmlUrl; }
+
+    // Mostrar hint
+    var hint = $('#source-hint'); if(hint){ hint.textContent = 'Fuente: Google Sheets publicada (CSV)'; }
+
+    // Intentar cargar CSV con timeout
+    var ctrl = ('AbortController' in window) ? new AbortController() : null;
+    var timer = setTimeout(function(){ try{ ctrl && ctrl.abort(); }catch(e){} }, 12000);
+
+    log('Cargando CSV:', dataUrl);
+    fetch(dataUrl, { signal: ctrl? ctrl.signal : undefined, credentials:'omit', cache:'no-store' })
+      .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.text(); })
+      .then(function(txt){ clearTimeout(timer); render(txt, publishedId, gid, htmlUrl); })
+      .catch(function(err){ clearTimeout(timer); log('Error CSV:', err && err.message ? err.message : err); showFallback(htmlUrl, 'No fue posible cargar los datos dinámicos. Se muestra la hoja publicada.'); });
+  }
+
+  function showFallback(htmlUrl, msg){
+    var loadEl = $('#loading'); if(loadEl) loadEl.style.display = 'none';
+    var err = $('#error'); if(err){ err.style.display='block'; err.textContent = msg || 'No se pudieron cargar datos dinámicos.'; }
+    var fb = $('#fallback'); var fbf = $('#fallback-frame');
+    if(fbf){ fbf.src = htmlUrl; }
+    if(fb){ fb.style.display='block'; }
+  }
+
+  function render(csvText, publishedId, gid, htmlUrl){
+    try {
+      var rows = parseCSV(csvText);
+      log('Filas CSV:', rows.length);
+      if(!rows || rows.length<2){ throw new Error('CSV vacío o sin datos'); }
+
+      // Asumimos cabecera en la primera fila
+      // Esperado: [Ticker, Empresa, Sector, % Cartera, Precio, Nº Acciones, Valor €, Dividendo Anual, Yield]
+      var header = rows[0].map(function(h){ return (h||'').toString().trim().toLowerCase(); });
+      var idx = {
+        ticker: header.indexOf('ticker'),
+        empresa: header.indexOf('empresa'),
+        sector: header.indexOf('sector'),
+        pct: header.indexOf('% cartera') !== -1 ? header.indexOf('% cartera') : header.indexOf('porcentaje cartera'),
+        precio: header.indexOf('precio'),
+        acciones: header.indexOf('nº acciones') !== -1 ? header.indexOf('nº acciones') : header.indexOf('acciones'),
+        valor: header.indexOf('valor €') !== -1 ? header.indexOf('valor €') : header.indexOf('valor'),
+        dividendo: header.indexOf('dividendo anual') !== -1 ? header.indexOf('dividendo anual') : header.indexOf('dividendo'),
+        yield: header.indexOf('yield')
+      };
+
+      var tbody = $('#tbody'); if(!tbody) throw new Error('No tbody');
+      tbody.innerHTML = '';
+
+      var data = [];
+      for(var r=1; r<rows.length; r++){
+        var row = rows[r]; if(!row || !row.length) continue;
+        var ticker = idx.ticker>-1 ? (row[idx.ticker]||'').toString().trim() : '';
+        if(!ticker || ticker.toLowerCase()==='ticker') continue;
+        var empresa = idx.empresa>-1 ? (row[idx.empresa]||'') : '';
+        var sector = idx.sector>-1 ? (row[idx.sector]||'') : '';
+        var pct = idx.pct>-1 ? (row[idx.pct]||'') : '';
+        var precio = idx.precio>-1 ? toNumber(row[idx.precio]) : null;
+        var acciones = idx.acciones>-1 ? toNumber(row[idx.acciones]) : null;
+        var valor = idx.valor>-1 ? toNumber(row[idx.valor]) : null;
+        var divAnual = idx.dividendo>-1 ? toNumber(row[idx.dividendo]) : null;
+        var yld = idx.yield>-1 ? toNumber(row[idx.yield]) : null;
+        if(!yld && divAnual!=null && precio!=null && precio>0){ yld = (divAnual / precio) * 100; }
+        var divTotal = (divAnual!=null && acciones!=null) ? (divAnual * acciones) : 0;
+
+        data.push({ ticker:ticker, empresa:empresa, sector:sector, pct:pct, precio:precio, acciones:acciones, valor:valor, divAnual:divAnual, yld:yld, divTotal:divTotal });
+
+        var tr = document.createElement('tr');
+        tr.innerHTML = ''+
+          '<td><span class="badge-ticker">'+ ticker +'</span></td>'+
+          '<td><span style="font-weight:700;color:#1f2937">'+ empresa +'</span></td>'+
+          '<td><span class="badge-sector">'+ (sector||'') +'</span></td>'+
+          '<td style="text-align:center;font-weight:700;">'+ (pct||'—') +'</td>'+
+          '<td style="text-align:right;font-weight:700;">'+ fmt(precio,2) +' €</td>'+
+          '<td style="text-align:right;">'+ (yld!=null? '<span class="badge-yield">'+ fmt(yld,2) +'%</span>':'—') +'</td>'+
+          '<td style="text-align:right;font-weight:600;">'+ fmt(acciones,0) +'</td>'+
+          '<td style="text-align:right;"><span style="font-weight:800;color:#059669;font-size:1.05rem;">'+ fmt(divTotal,2) +' €</span></td>'+
+          '<td style="text-align:right;"><span style="font-weight:800;color:#1e40af;font-size:1.05rem;">'+ fmt(valor,2) +' €</span></td>';
+        tbody.appendChild(tr);
+      }
+
+      if(!data.length){ throw new Error('No se encontraron filas válidas'); }
+
+      // Estadísticas
+      var totalEmpresas = data.length;
+      var valorTotal = data.reduce(function(a,b){ return a + (b.valor||0); }, 0);
+      var divAnualTotal = data.reduce(function(a,b){ return a + (b.divTotal||0); }, 0);
+
+      var stats = $('#stats');
+      stats.innerHTML = ''+
+        '<div class="stat">\n  <div class="icon"><i class="fas fa-building"></i></div>\n  <div class="label">Total Empresas</div>\n  <div class="value">'+ totalEmpresas +'</div>\n  <div class="text-slate-500 text-sm mt-1">Posiciones en cartera</div>\n</div>'+
+        '<div class="stat">\n  <div class="icon"><i class="fas fa-wallet"></i></div>\n  <div class="label">Valor Total</div>\n  <div class="value">'+ fmt(valorTotal,0) +' €</div>\n  <div class="text-slate-500 text-sm mt-1">Valor de mercado</div>\n</div>'+
+        '<div class="stat">\n  <div class="icon" style="background:#d1fae5;"><i class="fas fa-hand-holding-usd" style="color:#059669;"></i></div>\n  <div class="label">Dividendo Anual Total</div>\n  <div class="value" style="color:#059669;">'+ fmt(divAnualTotal,2) +' €</div>\n  <div class="text-slate-500 text-sm mt-1">Ingreso anual estimado</div>\n</div>';
+
+      // Mostrar tabla y ocultar cargas
+      var loading = $('#loading'); if(loading) loading.style.display='none';
+      var err = $('#error'); if(err){ err.style.display='none'; err.textContent=''; }
+      var card = $('#table-card'); if(card) card.style.display='block';
+      var fb = $('#fallback'); if(fb) fb.style.display='none';
+
+      // Actualizar fallback frame src (por si el usuario decide alternar manualmente)
+      var fbf = $('#fallback-frame'); if(fbf) fbf.src = htmlUrl;
+
+    } catch(e){
+      log('Error render:', e && e.message ? e.message : e);
+      showFallback(htmlUrl, 'No fue posible procesar los datos. Mostrando la hoja publicada.');
+    }
+  }
+
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', load); else load();
+})();
+</script>
+</body>
+</html>

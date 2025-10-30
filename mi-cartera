@@ -39,7 +39,6 @@
     .error-cartera { background: #fee2e2; border-left: 4px solid #ef4444; padding: 1.5rem; border-radius: 8px; margin: 2rem 0; }
     .error-cartera h3 { color: #991b1b; font-weight: 600; margin-bottom: 0.5rem; }
     .error-cartera p { color: #dc2626; font-size: 0.875rem; }
-    
     /* Colores por sector */
     .sector-financials { background: linear-gradient(135deg, #3b82f6, #60a5fa); }
     .sector-health-care { background: linear-gradient(135deg, #10b981, #34d399); }
@@ -53,92 +52,72 @@
     .sector-materials { background: linear-gradient(135deg, #65a30d, #84cc16); }
     .sector-etf { background: linear-gradient(135deg, #4c1d95, #7c3aed); }
     .sector-other { background: linear-gradient(135deg, #64748b, #94a3b8); }
-    
     /* Colores por yield */
     .yield-alto { background: linear-gradient(135deg, #10b981, #34d399); } /* > 4% */
     .yield-medio { background: linear-gradient(135deg, #f59e0b, #fbbf24); } /* 2-4% */
     .yield-bajo { background: linear-gradient(135deg, #ef4444, #f97316); } /* < 2% */
-    
     .filter-buttons { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
     .filter-btn { padding: 10px 20px; border-radius: 25px; border: 2px solid #e5e7eb; background: white; color: #64748b; font-weight: 600; cursor: pointer; transition: all 0.3s; }
     .filter-btn:hover { border-color: #667eea; color: #667eea; }
     .filter-btn.active { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-color: transparent; }
-    
     /* Filtros de sector con colores */
     .filter-btn[data-filter="sector-financials"] { border-color: #3b82f6; }
     .filter-btn[data-filter="sector-financials"]:hover { background: linear-gradient(135deg, #3b82f6, #60a5fa); color: white; border-color: #3b82f6; }
     .filter-btn[data-filter="sector-financials"].active { background: linear-gradient(135deg, #3b82f6, #60a5fa); color: white; border-color: #3b82f6; }
-    
     .filter-btn[data-filter="sector-health-care"] { border-color: #10b981; }
     .filter-btn[data-filter="sector-health-care"]:hover { background: linear-gradient(135deg, #10b981, #34d399); color: white; border-color: #10b981; }
     .filter-btn[data-filter="sector-health-care"].active { background: linear-gradient(135deg, #10b981, #34d399); color: white; border-color: #10b981; }
-    
     .filter-btn[data-filter="sector-consumer-staples"] { border-color: #f59e0b; }
     .filter-btn[data-filter="sector-consumer-staples"]:hover { background: linear-gradient(135deg, #f59e0b, #fbbf24); color: white; border-color: #f59e0b; }
     .filter-btn[data-filter="sector-consumer-staples"].active { background: linear-gradient(135deg, #f59e0b, #fbbf24); color: white; border-color: #f59e0b; }
-    
     .filter-btn[data-filter="sector-utilities"] { border-color: #8b5cf6; }
     .filter-btn[data-filter="sector-utilities"]:hover { background: linear-gradient(135deg, #8b5cf6, #a78bfa); color: white; border-color: #8b5cf6; }
     .filter-btn[data-filter="sector-utilities"].active { background: linear-gradient(135deg, #8b5cf6, #a78bfa); color: white; border-color: #8b5cf6; }
-    
     .filter-btn[data-filter="sector-industrials"] { border-color: #ec4899; }
     .filter-btn[data-filter="sector-industrials"]:hover { background: linear-gradient(135deg, #ec4899, #f472b6); color: white; border-color: #ec4899; }
     .filter-btn[data-filter="sector-industrials"].active { background: linear-gradient(135deg, #ec4899, #f472b6); color: white; border-color: #ec4899; }
-    
     .filter-btn[data-filter="sector-real-estate"] { border-color: #06b6d4; }
     .filter-btn[data-filter="sector-real-estate"]:hover { background: linear-gradient(135deg, #06b6d4, #0ea5e9); color: white; border-color: #06b6d4; }
     .filter-btn[data-filter="sector-real-estate"].active { background: linear-gradient(135deg, #06b6d4, #0ea5e9); color: white; border-color: #06b6d4; }
-    
     .filter-btn[data-filter="sector-technology"] { border-color: #ef4444; }
     .filter-btn[data-filter="sector-technology"]:hover { background: linear-gradient(135deg, #ef4444, #f97316); color: white; border-color: #ef4444; }
     .filter-btn[data-filter="sector-technology"].active { background: linear-gradient(135deg, #ef4444, #f97316); color: white; border-color: #ef4444; }
-    
     .filter-btn[data-filter="sector-communication-services"] { border-color: #14b8a6; }
     .filter-btn[data-filter="sector-communication-services"]:hover { background: linear-gradient(135deg, #14b8a6, #0d9488); color: white; border-color: #14b8a6; }
     .filter-btn[data-filter="sector-communication-services"].active { background: linear-gradient(135deg, #14b8a6, #0d9488); color: white; border-color: #14b8a6; }
-    
     .filter-btn[data-filter="sector-energy"] { border-color: #78716c; }
     .filter-btn[data-filter="sector-energy"]:hover { background: linear-gradient(135deg, #78716c, #a8a29e); color: white; border-color: #78716c; }
     .filter-btn[data-filter="sector-energy"].active { background: linear-gradient(135deg, #78716c, #a8a29e); color: white; border-color: #78716c; }
-    
     .filter-btn[data-filter="sector-materials"] { border-color: #65a30d; }
     .filter-btn[data-filter="sector-materials"]:hover { background: linear-gradient(135deg, #65a30d, #84cc16); color: white; border-color: #65a30d; }
     .filter-btn[data-filter="sector-materials"].active { background: linear-gradient(135deg, #65a30d, #84cc16); color: white; border-color: #65a30d; }
-    
     .filter-btn[data-filter="sector-etf"] { border-color: #4c1d95; }
     .filter-btn[data-filter="sector-etf"]:hover { background: linear-gradient(135deg, #4c1d95, #7c3aed); color: white; border-color: #4c1d95; }
     .filter-btn[data-filter="sector-etf"].active { background: linear-gradient(135deg, #4c1d95, #7c3aed); color: white; border-color: #4c1d95; }
-    
     /* Filtros de yield con colores */
     .filter-btn[data-filter="yield-alto"] { border-color: #10b981; }
     .filter-btn[data-filter="yield-alto"]:hover { background: linear-gradient(135deg, #10b981, #34d399); color: white; border-color: #10b981; }
     .filter-btn[data-filter="yield-alto"].active { background: linear-gradient(135deg, #10b981, #34d399); color: white; border-color: #10b981; }
-    
     .filter-btn[data-filter="yield-medio"] { border-color: #f59e0b; }
     .filter-btn[data-filter="yield-medio"]:hover { background: linear-gradient(135deg, #f59e0b, #fbbf24); color: white; border-color: #f59e0b; }
     .filter-btn[data-filter="yield-medio"].active { background: linear-gradient(135deg, #f59e0b, #fbbf24); color: white; border-color: #f59e0b; }
-    
     .filter-btn[data-filter="yield-bajo"] { border-color: #ef4444; }
     .filter-btn[data-filter="yield-bajo"]:hover { background: linear-gradient(135deg, #ef4444, #f97316); color: white; border-color: #ef4444; }
     .filter-btn[data-filter="yield-bajo"].active { background: linear-gradient(135deg, #ef4444, #f97316); color: white; border-color: #ef4444; }
-    
     .sortable { cursor: pointer; user-select: none; position: relative; }
     .sortable:hover { background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #3b82f6 100%); }
     .sortable::after { content: '⇅'; position: absolute; right: 8px; opacity: 0.3; font-size: 0.875rem; }
     .sortable.sort-asc::after { content: '↑'; opacity: 1; color: #10b981; }
     .sortable.sort-desc::after { content: '↓'; opacity: 1; color: #ef4444; }
-    
     @media (max-width: 768px) {
       .gradient-bg-cartera h1 { font-size: 1.875rem; }
       .table-cartera { font-size: 0.75rem; }
       .table-cartera td, .table-cartera th { padding: 0.5rem 0.375rem; }
     }
-    
     /* Estilos para filas alternas */
     .table-cartera tbody tr:nth-child(even) {
       background-color: #f9fafb;
     }
-    
     /* Hover más suave */
     .table-cartera tbody tr:hover {
       background-color: #f1f5f9 !important;
@@ -155,27 +134,23 @@
         <i class="fas fa-sync-alt"></i> Datos actualizados automáticamente desde Google Sheets
       </p>
     </div>
-
     <!-- Stats Cards -->
     <div id="stats-container-cartera" class="stats-grid-cartera"></div>
-
     <!-- Loading State -->
     <div id="loading-cartera" class="loading-cartera">
       <div class="spinner-cartera"></div>
       <p style="margin-top: 1rem; color: #6b7280;">Cargando datos...</p>
     </div>
-
     <!-- Error State -->
     <div id="error-cartera" class="error-cartera hidden">
       <h3><i class="fas fa-exclamation-triangle"></i> Error al cargar los datos</h3>
       <p>Por favor, verifica que la hoja de cálculo sea pública y accesible.</p>
       <div id="error-detail" class="mt-2 text-xs text-red-700"></div>
     </div>
-
     <!-- Filters -->
     <div class="main-table-card">
       <div class="filter-buttons">
-        <button class="filter-btn active" data-filter="all">
+        <button class="filter-btn" data-filter="all">
           <i class="fas fa-list"></i> Todas
         </button>
         <button class="filter-btn" data-filter="sector-financials">
@@ -220,9 +195,11 @@
         <button class="filter-btn" data-filter="yield-bajo">
           <i class="fas fa-percentage"></i> Yield < 2%
         </button>
+        <button class="filter-btn" id="clear-filters">
+          <i class="fas fa-broom"></i> Limpiar
+        </button>
       </div>
     </div>
-
     <!-- Table Container -->
     <div id="table-container-cartera" class="table-card-cartera hidden">
       <table class="table-cartera">
@@ -244,16 +221,13 @@
       </table>
     </div>
   </div>
-
   <script>
     (function() {
       'use strict';
-
       // Estado UI
       const $ = (sel) => document.querySelector(sel);
       const setHidden = (id, hidden) => { const el = document.getElementById(id); if (!el) return; el.classList.toggle('hidden', hidden); };
       const setStatus = (msg) => { const el = document.getElementById('status-text'); if (el) el.textContent = msg || ''; };
-
       // Números y formato
       function cleanNum(v) {
         if (v == null || v === "") return null;
@@ -275,24 +249,19 @@
         const n = parseFloat(s);
         return isNaN(n) ? null : n;
       }
-      
       function fmt(n, decimals, unit) {
         if (n == null || isNaN(n)) return "—";
         const formatted = n.toLocaleString("es-ES", { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
         return unit ? formatted + " " + unit : formatted;
       }
-
       function clearTable() {
         const tbody = document.getElementById('portfolio-body-cartera');
         if (tbody) tbody.innerHTML = '';
       }
-
       let currentData = [];
-
       function renderRows(portfolioData) {
         const tbody = document.getElementById('portfolio-body-cartera');
         if (!tbody) return;
-        
         tbody.innerHTML = '';
         portfolioData.forEach((r, idx) => {
           const tr = document.createElement('tr');
@@ -301,7 +270,6 @@
           tr.setAttribute('data-valor', r.valorEuros != null ? r.valorEuros : 0);
           tr.setAttribute('data-dividendo', r.dividendoAnualEuros != null ? r.dividendoAnualEuros : 0);
           tr.setAttribute('data-yield', r.yieldActual != null ? r.yieldActual : 0);
-          
           // # (índice)
           const tdIndex = document.createElement('td');
           tdIndex.style.textAlign = 'center';
@@ -309,7 +277,6 @@
           tdIndex.style.color = '#9ca3af';
           tdIndex.textContent = idx + 1;
           tr.appendChild(tdIndex);
-          
           // Ticker (en mayúsculas)
           const tdTicker = document.createElement('td');
           const spanTicker = document.createElement('span');
@@ -317,7 +284,6 @@
           spanTicker.textContent = r.ticker ? r.ticker.toUpperCase() : '';
           tdTicker.appendChild(spanTicker);
           tr.appendChild(tdTicker);
-          
           // Empresa (modificada para British American Tobacco)
           const tdEmpresa = document.createElement('td');
           const divEmpresa = document.createElement('div');
@@ -330,12 +296,10 @@
           divEmpresa.textContent = empresaNombre;
           tdEmpresa.appendChild(divEmpresa);
           tr.appendChild(tdEmpresa);
-          
           // Sector con color
           const tdSector = document.createElement('td');
           const spanSector = document.createElement('span');
           spanSector.className = 'sector-badge';
-          
           // Asignar clase de color según el sector
           const sectorLower = (r.sector || '').toLowerCase();
           if (sectorLower.includes('financials')) {
@@ -363,11 +327,9 @@
           } else {
             spanSector.classList.add('sector-other');
           }
-          
           spanSector.textContent = r.sector || '';
           tdSector.appendChild(spanSector);
           tr.appendChild(tdSector);
-          
           // % Cartera (multiplicado por 100 y formateado con 2 decimales)
           const tdPct = document.createElement('td');
           tdPct.style.textAlign = 'center';
@@ -378,7 +340,6 @@
             tdPct.textContent = '—';
           }
           tr.appendChild(tdPct);
-          
           // Precio
           const tdPrecio = document.createElement('td');
           tdPrecio.style.textAlign = 'right';
@@ -389,7 +350,6 @@
             tdPrecio.textContent = "—";
           }
           tr.appendChild(tdPrecio);
-          
           // Yield Actual (%) con color según valor
           const tdYield = document.createElement('td');
           tdYield.style.textAlign = 'center';
@@ -397,7 +357,6 @@
           if (r.yieldActual != null) {
             const yb = document.createElement('span');
             yb.className = 'yield-badge';
-            
             // Asignar clase de color según el yield
             if (r.yieldActual >= 4) {
               yb.classList.add('yield-alto');
@@ -406,21 +365,18 @@
             } else {
               yb.classList.add('yield-bajo');
             }
-            
             yb.textContent = fmt(r.yieldActual, 2, '%');
             tdYield.appendChild(yb);
           } else {
             tdYield.textContent = '—';
           }
           tr.appendChild(tdYield);
-          
           // Nº Acciones
           const tdNum = document.createElement('td');
           tdNum.style.textAlign = 'right';
           tdNum.style.fontWeight = '500';
           tdNum.textContent = r.numAcciones != null ? fmt(r.numAcciones, 0) : '—';
           tr.appendChild(tdNum);
-          
           // Dividendo Anual €
           const tdDiv = document.createElement('td');
           tdDiv.style.textAlign = 'right';
@@ -431,7 +387,6 @@
             tdDiv.textContent = "—";
           }
           tr.appendChild(tdDiv);
-          
           // Valor €
           const tdVal = document.createElement('td');
           tdVal.style.textAlign = 'right';
@@ -442,15 +397,12 @@
           spanVal.textContent = r.valorEuros != null ? fmt(r.valorEuros, 2, '€') : '—';
           tdVal.appendChild(spanVal);
           tr.appendChild(tdVal);
-          
           tbody.appendChild(tr);
         });
-        
         // Setup filters and sorting after rendering
         setupFilters();
         setupSorting();
       }
-
       function displayStats(data) {
         const statsContainer = document.getElementById('stats-container-cartera');
         if (!statsContainer) return;
@@ -458,22 +410,18 @@
           statsContainer.innerHTML = '';
           return;
         }
-        
         let totalStocks = data.length;
         let totalValue = 0;
         let totalDividend = 0;
-        
         data.forEach(item => {
           totalValue += (typeof item.valorEuros === 'number' ? item.valorEuros : 0);
           totalDividend += (typeof item.dividendoAnualEuros === 'number' ? item.dividendoAnualEuros : 0);
         });
-        
         // Calcular yield de cartera
         let portfolioYield = 0;
         if (totalValue > 0) {
           portfolioYield = (totalDividend / totalValue) * 100;
         }
-        
         statsContainer.innerHTML =
           '<div class="stat-card-cartera">' +
             '<div class="stat-icon"><i class="fas fa-building"></i></div>' +
@@ -500,14 +448,12 @@
             '<p style="font-size: 0.75rem; color: #6b7280; margin-top: 0.5rem;">Rentabilidad media</p>' +
           '</div>';
       }
-
       function buildSheetUrl(isPublished, sheetId, gid, callbackName) {
         const base = isPublished ? 
           'https://docs.google.com/spreadsheets/d/e/' : 
           'https://docs.google.com/spreadsheets/d/';
         return base + encodeURIComponent(sheetId) + '/gviz/tq?gid=' + encodeURIComponent(gid) + '&headers=1&tqx=responseHandler:' + encodeURIComponent(callbackName);
       }
-
       function showError(msg, details) {
         setHidden('loading-cartera', true);
         setHidden('table-container-cartera', true);
@@ -518,7 +464,6 @@
         errDetail.textContent = details || '';
         console.error('Mostrar error:', msg, details);
       }
-
       function cleanupOldScripts() {
         const scripts = document.querySelectorAll('script[data-gsloader]');
         scripts.forEach(s => {
@@ -527,23 +472,18 @@
           }
         });
       }
-
       function parseResponseToData(response) {
         if (!response || response.status !== 'ok' || !response.table || !Array.isArray(response.table.rows)) {
           const errTxt = response && response.errors ? JSON.stringify(response.errors) : 'Respuesta inválida o sin permisos';
           throw new Error(errTxt);
         }
-        
         const rows = response.table.rows;
         const portfolioData = [];
-        
         rows.forEach((rowObj, idx) => {
           const row = rowObj.c || [];
           if (row.length < 3) return; // requiere mínimo ticker, empresa, sector
-          
           const ticker = row[0] && row[0].v != null ? String(row[0].v).trim() : '';
           if (!ticker || ticker.toLowerCase() === 'ticker') return;
-          
           const empresa = row[1] && row[1].v != null ? String(row[1].v).trim() : '';
           const sector = row[2] && row[2].v != null ? String(row[2].v).trim() : '';
           // Asumimos que el porcentaje de cartera viene como decimal (0.0227) y lo almacenamos como número
@@ -555,18 +495,15 @@
           const dividendoAnualEuros = row[7] ? cleanNum(row[7].v) : null;
           // Columna I (índice 8) - DPA (Dividendo Por Acción) en Euros
           const dpaEuros = row[8] ? cleanNum(row[8].v) : null;
-          
           // Calcular Yield Actual: (DPA / Precio) * 100
           let yieldActual = null;
           if (dpaEuros != null && precio != null && precio !== 0) {
             yieldActual = (dpaEuros / precio) * 100;
           }
-          
           // Corrección para tickers UK que empiezan por LON:
           if (ticker && ticker.startsWith('LON:') && yieldActual != null) {
             yieldActual = yieldActual * 100;
           }
-          
           portfolioData.push({
             ticker,
             empresa,
@@ -580,14 +517,11 @@
             yieldActual // Campo calculado
           });
         });
-        
         if (portfolioData.length === 0) {
           throw new Error('No se encontraron filas válidas en la hoja (revisa encabezados y permisos).');
         }
-        
         return portfolioData;
       }
-
       function loadPortfolioData({ isPublished, sheetId, gid, timeoutMs = 15000 }) {
         try {
           cleanupOldScripts();
@@ -596,28 +530,23 @@
           setHidden('error-cartera', true);
           setHidden('table-container-cartera', true);
           setHidden('loading-cartera', false);
-
           if (!sheetId) {
             showError('Falta el ID de la hoja', 'Introduce un ID válido en el panel de configuración.');
             return;
           }
-
           const callbackName = 'PortfolioCartera_' + Date.now() + '_' + Math.random().toString(36).slice(2);
           const sheetUrl = buildSheetUrl(isPublished, sheetId, gid || '0', callbackName);
           console.log('Cargando desde:', sheetUrl);
-
           let finished = false;
           const onFinish = () => {
             finished = true;
             try { delete window[callbackName]; } catch(_) {}
           };
-
           const to = setTimeout(() => {
             if (finished) return;
             onFinish();
             showError('Tiempo de espera agotado al conectar con Google Sheets', 'Posibles causas: ID incorrecto, la hoja no es pública o el tipo (Publicada/Normal) no coincide.');
           }, timeoutMs);
-
           window[callbackName] = function(response) {
             try {
               console.log('Respuesta recibida');
@@ -636,7 +565,6 @@
               onFinish();
             }
           };
-
           const script = document.createElement('script');
           script.src = sheetUrl;
           script.async = true;
@@ -653,7 +581,6 @@
           showError('Error inesperado', e.message || String(e));
         }
       }
-
       // Helpers: extraer ID y GID desde una URL pegada
       function parseSheetInput(raw) {
         const out = { type: null, id: '', gid: '' };
@@ -678,87 +605,80 @@
         if (!out.id) { out.id = raw.trim(); }
         return out;
       }
-
       function setupFilters() {
-        var buttons = document.querySelectorAll(".filter-btn");
-        buttons.forEach(function(btn) {
-          btn.addEventListener("click", function() {
-            buttons.forEach(function(b) { b.classList.remove("active"); });
-            btn.classList.add("active");
-            var filter = btn.getAttribute("data-filter");
-            var rows = document.querySelectorAll("#portfolio-body-cartera tr");
-            rows.forEach(function(row) {
-              var sector = row.getAttribute("data-sector");
-              var yieldVal = parseFloat(row.getAttribute("data-yield"));
-              var show = false;
-              switch(filter) {
-                case "all":
-                  show = true;
-                  break;
-                case "sector-financials":
-                  show = sector.includes("financials");
-                  break;
-                case "sector-health-care":
-                  show = sector.includes("health-care") || sector.includes("healthcare") || sector.includes("health care");
-                  break;
-                case "sector-consumer-staples":
-                  show = sector.includes("consumer-staples") || sector.includes("consumer staples");
-                  break;
-                case "sector-utilities":
-                  show = sector.includes("utilities");
-                  break;
-                case "sector-industrials":
-                  show = sector.includes("industrials");
-                  break;
-                case "sector-real-estate":
-                  show = sector.includes("real-estate") || sector.includes("real estate");
-                  break;
-                case "sector-technology":
-                  show = sector.includes("technology");
-                  break;
-                case "sector-communication-services":
-                  show = sector.includes("communication") || sector.includes("telecom");
-                  break;
-                case "sector-energy":
-                  show = sector.includes("energy");
-                  break;
-                case "sector-materials":
-                  show = sector.includes("materials");
-                  break;
-                case "sector-etf":
-                  show = sector.includes("etf");
-                  break;
-                case "yield-alto":
-                  show = yieldVal >= 4;
-                  break;
-                case "yield-medio":
-                  show = yieldVal >= 2 && yieldVal < 4;
-                  break;
-                case "yield-bajo":
-                  show = yieldVal < 2;
-                  break;
-                default:
-                  show = true;
-              }
-              row.style.display = show ? "" : "none";
-            });
-            // Reindexar después de filtrar
-            reindexRows();
+        const buttons = document.querySelectorAll(".filter-btn:not(#clear-filters)");
+        const clearBtn = document.getElementById("clear-filters");
+
+        // Aplicar filtros combinados
+        function applyCombinedFilters() {
+          const activeSectorFilters = Array.from(buttons)
+            .filter(btn => btn.classList.contains("active") && btn.dataset.filter.startsWith("sector-"))
+            .map(btn => btn.dataset.filter);
+
+          const activeYieldFilters = Array.from(buttons)
+            .filter(btn => btn.classList.contains("active") && btn.dataset.filter.startsWith("yield-"))
+            .map(btn => btn.dataset.filter);
+
+          const showAll = activeSectorFilters.length === 0 && activeYieldFilters.length === 0;
+
+          const rows = document.querySelectorAll("#portfolio-body-cartera tr");
+          rows.forEach(row => {
+            const sector = row.getAttribute("data-sector");
+            const yieldVal = parseFloat(row.getAttribute("data-yield"));
+
+            let show = true;
+
+            // Filtro por sector (OR entre sectores seleccionados)
+            if (activeSectorFilters.length > 0) {
+              const matchesSector = activeSectorFilters.some(f => {
+                const key = f.replace('sector-', '');
+                return sector.includes(key);
+              });
+              show = show && matchesSector;
+            }
+
+            // Filtro por yield (OR entre rangos seleccionados)
+            if (activeYieldFilters.length > 0) {
+              const matchesYield = activeYieldFilters.some(f => {
+                if (f === "yield-alto") return yieldVal >= 4;
+                if (f === "yield-medio") return yieldVal >= 2 && yieldVal < 4;
+                if (f === "yield-bajo") return yieldVal < 2;
+                return false;
+              });
+              show = show && matchesYield;
+            }
+
+            row.style.display = show || showAll ? "" : "none";
+          });
+
+          reindexRows();
+        }
+
+        // Eventos para botones de filtro (toggle)
+        buttons.forEach(btn => {
+          btn.addEventListener("click", function () {
+            this.classList.toggle("active");
+            applyCombinedFilters();
           });
         });
-      }
 
+        // Evento para limpiar filtros
+        if (clearBtn) {
+          clearBtn.addEventListener("click", () => {
+            buttons.forEach(btn => btn.classList.remove("active"));
+            applyCombinedFilters();
+          });
+        }
+      }
       function reindexRows() {
         const visibleRows = document.querySelectorAll("#portfolio-body-cartera tr:not([style*='display: none'])");
         visibleRows.forEach(function(row, index) {
           row.cells[0].textContent = index + 1;
         });
       }
-
       function setupSorting() {
         var sortableHeaders = document.querySelectorAll(".sortable");
         var currentSort = { field: null, direction: 'asc' };
-        
         sortableHeaders.forEach(function(header) {
           header.addEventListener("click", function() {
             var sortField = header.getAttribute("data-sort");
@@ -767,25 +687,20 @@
               direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
             }
             currentSort = { field: sortField, direction: direction };
-            
             // Actualizar clases visuales
             sortableHeaders.forEach(function(h) {
               h.classList.remove('sort-asc', 'sort-desc');
             });
             header.classList.add(direction === 'asc' ? 'sort-asc' : 'sort-desc');
-            
             sortTable(sortField, direction);
           });
         });
       }
-
       function sortTable(sortField, direction) {
         var tbody = document.getElementById("portfolio-body-cartera");
         var rows = Array.from(tbody.querySelectorAll("tr"));
-        
         rows.sort(function(a, b) {
           var aValue, bValue;
-          
           switch(sortField) {
             case 'index':
               aValue = parseInt(a.cells[0].textContent);
@@ -819,25 +734,20 @@
             default:
               return 0;
           }
-          
           if (aValue === null) return 1;
           if (bValue === null) return -1;
-          
           if (direction === 'asc') {
             return aValue > bValue ? 1 : aValue < bValue ? -1 : 0;
           } else {
             return aValue < bValue ? 1 : aValue > bValue ? -1 : 0;
           }
         });
-        
         rows.forEach(function(row) {
           tbody.appendChild(row);
         });
-        
         // Reindexar después de ordenar
         reindexRows();
       }
-
       // Carga directa usando tu URL
       (function initAutoLoad() {
         try {
@@ -858,4 +768,3 @@
   </script>
 </body>
 </html>
-

@@ -504,6 +504,10 @@
           if (ticker && ticker.startsWith('LON:') && yieldActual != null) {
             yieldActual = yieldActual * 100;
           }
+          // Corrección para tickers que empiezan por HKG: - multiplicar por 10
+          if (ticker && ticker.startsWith('HKG:') && yieldActual != null) {
+            yieldActual = yieldActual * 10;
+          }
           portfolioData.push({
             ticker,
             empresa,
@@ -608,26 +612,20 @@
       function setupFilters() {
         const buttons = document.querySelectorAll(".filter-btn:not(#clear-filters)");
         const clearBtn = document.getElementById("clear-filters");
-
         // Aplicar filtros combinados
         function applyCombinedFilters() {
           const activeSectorFilters = Array.from(buttons)
             .filter(btn => btn.classList.contains("active") && btn.dataset.filter.startsWith("sector-"))
             .map(btn => btn.dataset.filter);
-
           const activeYieldFilters = Array.from(buttons)
             .filter(btn => btn.classList.contains("active") && btn.dataset.filter.startsWith("yield-"))
             .map(btn => btn.dataset.filter);
-
           const showAll = activeSectorFilters.length === 0 && activeYieldFilters.length === 0;
-
           const rows = document.querySelectorAll("#portfolio-body-cartera tr");
           rows.forEach(row => {
             const sector = row.getAttribute("data-sector");
             const yieldVal = parseFloat(row.getAttribute("data-yield"));
-
             let show = true;
-
             // Filtro por sector (OR entre sectores seleccionados)
             if (activeSectorFilters.length > 0) {
               const matchesSector = activeSectorFilters.some(f => {
@@ -636,7 +634,6 @@
               });
               show = show && matchesSector;
             }
-
             // Filtro por yield (OR entre rangos seleccionados)
             if (activeYieldFilters.length > 0) {
               const matchesYield = activeYieldFilters.some(f => {
@@ -647,13 +644,10 @@
               });
               show = show && matchesYield;
             }
-
             row.style.display = show || showAll ? "" : "none";
           });
-
           reindexRows();
         }
-
         // Eventos para botones de filtro (toggle)
         buttons.forEach(btn => {
           btn.addEventListener("click", function () {
@@ -661,7 +655,6 @@
             applyCombinedFilters();
           });
         });
-
         // Evento para limpiar filtros
         if (clearBtn) {
           clearBtn.addEventListener("click", () => {
@@ -768,3 +761,5 @@
   </script>
 </body>
 </html>
+
+
